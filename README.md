@@ -1,4 +1,4 @@
-# GC9A01A Readme
+# GC9A01 Readme
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/whitelight976)
 
@@ -18,10 +18,10 @@
 
 ## Overview
 
-* Name: GC9A01A
+* Name: GC9A01
 * Description:
 
-C++ Arduino library for a TFT SPI LCD, GC9A01A Driver.
+C++ Arduino library for a TFT SPI LCD, GC9A01 Driver.
 
 GC9A01 is a 262,144-color single-chip SOC driver for a-TFT liquid crystal display with resolution of
 240RGBx240 dots, comprising a 360-channel source driver, a 32-channel gate driver, 129,600 bytes
@@ -36,7 +36,7 @@ GRAM for graphic display data of 240RGBx240 dots, and power supply circuit.
 7. Advanced frame buffer mode included.
 8. Bitmaps supported: 1, 8 and 16 bit.
 9. Hardware & software SPI options
-10. [Project url link](https://github.com/gavinlyonsrepo/ GC9A01A_LTSM)
+10. [Project url link](https://github.com/gavinlyonsrepo/GC9A01_LTSM)
 
 * [DataSheet](https://buydisplay.com/download/ic/GC9A01A.pdf)
 
