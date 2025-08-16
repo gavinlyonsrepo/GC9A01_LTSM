@@ -1,0 +1,41 @@
+#######################################
+# Syntax Coloring Map For GC9A01_LTSM
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+GC9A01_LTSM	KEYWORD1
+PowerState_e	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+setAddrWindow	KEYWORD2
+TFTsetupGPIO_SPI	KEYWORD2
+TFTInitScreenSize	KEYWORD2
+TFTGC9A01Initialize	KEYWORD2
+TFTPowerDown	KEYWORD2
+TFTSwSpiGpioDelayGet	KEYWORD2
+TFTSwSpiGpioDelaySet	KEYWORD2
+TFTresetSWDisplay	KEYWORD2
+TFTsetRotation	KEYWORD2
+TFTchangeInvertMode	KEYWORD2
+TFTsetPowerMode	KEYWORD2
+TFTenableDisplay	KEYWORD2
+TFTsetBrightness	KEYWORD2
+TFTsetScrollArea	KEYWORD2
+TFTsetScrollStart	KEYWORD2
+TFTScrollModeLeave	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+NormalIdleOff	LITERAL1
+NormalIdleOn	LITERAL1
+PartialIdleOff	LITERAL1
+PartialIdleOn	LITERAL1
+SleepNormalIdleOff	LITERAL1
+SleepNormalIdleOn	LITERAL1
+SleepPartialIdleOff	LITERAL1
+SleepPartialIdleOn	LITERAL1
