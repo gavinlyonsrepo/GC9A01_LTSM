@@ -18,7 +18,8 @@
 
 ## Overview
 
-* Name: GC9A01
+* Name: GC9A01_LTSM
+* Author: Gavin Lyons
 * Description:
 
 C++ Arduino library for a TFT SPI LCD, GC9A01 Driver.
@@ -27,7 +28,7 @@ GC9A01 is a 262,144-color single-chip SOC driver for a-TFT liquid crystal displa
 240RGBx240 dots, comprising a 360-channel source driver, a 32-channel gate driver, 129,600 bytes
 GRAM for graphic display data of 240RGBx240 dots, and power supply circuit.
 
-1. Power modes, Invert , Scroll, Rotate, Bitmaps supported.
+1. Power modes, Invert, Scroll, Rotate, Bitmaps supported.
 2. Hardware & software SPI
 3. Tested on 240X240 Round Display
 4. Arduino eco-system library.
@@ -49,8 +50,8 @@ The library is included in the official Arduino library manger and the optimum w
 This library requires the Arduino library 'display16_LTSM' as a dependency. display16_LTSM library contains
 the graphics, bitmaps, and font methods as well as font data and bitmap test data. Its also 
 where the user sets options(debug, advanced graphics and frame buffer mode).
-When you install 'ST7735_LTSM' with Arduino IDE. It should install 'display16_LTSM' as well after 
-a prompt, if it does not you have to install it same way as ' GC9A01A_LTSM'.
+When you install 'GC9A01_LTSM' with Arduino IDE. It should install 'display16_LTSM' as well after 
+a prompt, if it does not you have to install it same way as 'GC9A01_LTSM'.
 The 'display16_LTSM' project and readme is at [URL github link.](https://github.com/gavinlyonsrepo/display16_LTSM)
 'display16_LTSM' is also written by author of this library. 
 
@@ -69,7 +70,7 @@ There are 5 example files included.
 | Filename .ino | Function  | Note |
 | --- | --- | --- |
 | HELLO WORLD | Hello world basic use case | --- |
-| MISC| Text , Graphics & Functions | dislib16 ADVANCED GRAPHICS ENABLE must be enabled for all tests to work|
+| MISC| Text, Graphics & Functions | dislib16 ADVANCED GRAPHICS ENABLE must be enabled for all tests to work|
 | BITMAP| 1,8 & 16 bit bitmaps tests + bitmap FPS tests| Bitmap test data is stored in arrays |
 | DEMO| A demo showing a gauge | dislib16 ADVANCED GRAPHICS ENABLE must be enabled |
 | FRAME BUFFER | Testing frame Buffer mode | dislib16 ADVANCED SCREEN BUFFER ENABLE must be enabled user option 2 |
