@@ -116,7 +116,7 @@ Connections as setup in HELLO_WORLD.ino  test file.
 | --- | --- | --- | --- |
 | 1 | LED | VCC 3.3 | VCC 3.3|
 | 2 | SCLK | MCU SPI CLK | GPIO12 |
-| 3 | SDA | MCU MOSI CLK | GPIO13 |
+| 3 | SDA | MCU MOSI | GPIO13 |
 | 4 | A0/DC | GPIO5 | GPIO5 |
 | 5 | RESET | GPIO4 | GPIO4 |
 | 6 | SS/CS | GPIO15 | GPIO15 |
@@ -127,6 +127,7 @@ Connections as setup in HELLO_WORLD.ino  test file.
 1. This is a 3.3V logic device do NOT connect the I/O logic lines to 5V logic device.
 2. SW SPI pick any GPIO you like , HW SPI SCLK and SDA will be tied to MCU SPI interface.
 3. Backlight on/off control is left to user.
+4. NOTE: Connect LED backlight pin 1 thru a resistor to VCC.
 
 ## Tested
 
@@ -134,8 +135,7 @@ Tested with both software and hardware SPI on:
 
 - **ESP32**
 - **Arduino UNO R4 Minima**  
-  *Frame buffer example is not supported on this board.*
-
+ 
 Compiled only (not fully hardware-tested) on:
 
 - **Arduino UNO**
@@ -143,7 +143,7 @@ Compiled only (not fully hardware-tested) on:
 - **STM32 “Blue Pill”**
 
 > Some examples on low-RAM MCUs will fail( insufficient memory ), numerous fonts and bitmap data are included.  
-> Frame buffer mode requires sufficient dynamic memory for the buffer — see the README in display16_LTSM for details.
+> Frame buffer mode example requires sufficient dynamic memory for the buffer — see the README in display16_LTSM for details.
 
 
 ## Output
