@@ -110,24 +110,23 @@ User can adjust screen pixel height, screen pixel width.
 
 [![pic ](https://github.com/gavinlyonsrepo/displaylib_16bit_PICO/blob/main/extra/image/gc1.png)](https://github.com/gavinlyonsrepo/displaylib_16bit_PICO/blob/main/extra/image/gc1.png)
 
-Connections as setup in main.cpp test file.
+Connections as setup in HELLO_WORLD.ino  test file.
 
-| Pin desc |  HW SPI |
-| --- | --- |
-| GND Ground | GND |
-| VCC |  3.3 VCC  |
-| SCL Clock | GPIO 18 |
-| SDA Data in | GPIO 19 |
-| RST Reset| GPIO 4 |
-| DC Data or command | GPIO 3  |
-| CS Chip select | GPIO 2 |
-| BL Backlight  | VCC |
+| TFT PinNum | Pindesc | Hardware SPI | Software SPI |
+| --- | --- | --- | --- |
+| 1 | LED | VCC 3.3 | VCC 3.3|
+| 2 | SCLK | MCU SPI CLK | GPIO12 |
+| 3 | SDA | MCU MOSI CLK | GPIO13 |
+| 4 | A0/DC | GPIO5 | GPIO5 |
+| 5 | RESET | GPIO4 | GPIO4 |
+| 6 | SS/CS | GPIO15 | GPIO15 |
+| 7 | VCC | VCC 3.3 | VCC 3.3|
+| 8 | GND | GND | GND |
+
 
 1. This is a 3.3V logic device do NOT connect the I/O logic lines to 5V logic device.
-2. SW SPI pick any GPIO you like , HW SPI SCLK and SDA will be tied to spio interface.
+2. SW SPI pick any GPIO you like , HW SPI SCLK and SDA will be tied to MCU SPI interface.
 3. Backlight on/off control is left to user.
-4. To operate without CS pin: pass -1 as argument for CS pin number in SetupGPIO()functions
-   and ground the CS pin on device side.
 
 ## Tested
 
