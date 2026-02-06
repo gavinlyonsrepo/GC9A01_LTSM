@@ -129,6 +129,8 @@ Connections as setup in HELLO_WORLD.ino  test file.
 2. SW SPI pick any GPIO you like , HW SPI SCLK and SDA will be tied to MCU SPI interface.
 3. Backlight on/off control is left to user.
 4. NOTE: Connect LED backlight pin 1 thru a resistor to VCC.
+5. if -1 is passed for reset pin, software reset is used, if LCD module has 
+missing or optional reset pin, untested on hardware, may not work.
 
 ## Tested
 

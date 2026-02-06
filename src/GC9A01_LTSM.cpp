@@ -114,11 +114,8 @@ void GC9A01_LTSM::TFTsetupGPIO_SPI(uint32_t speed_hz, int8_t rst, int8_t dc, int
 */
 void GC9A01_LTSM::TFTGC9A01Initialize() 
 {
-	if (_resetPinOn == true) 
-	{
+	if (_resetPinOn == true) {
 		TFTResetPIN();
-	}else {
-		TFTresetSWDisplay();
 	}
 	DISPLAY16_DC_SetDigitalOutput;
 	DISPLAY16_DC_SetLow;
@@ -220,7 +217,10 @@ void GC9A01_LTSM::cmdInitSequence(void)
 {
 	writeCommand(GC9A01_INREGEN1);
 	writeCommand(GC9A01_INREGEN2);
-
+	
+	if (_resetPinOn == false){
+		TFTresetSWDisplay(); // software reset, untested on hardware
+	}
 	// Undocumented in datasheet registers
 	writeCommand(0xEB); 
 	writeData(0x14);
