@@ -13,9 +13,18 @@ GC9A01_LTSM :: GC9A01_LTSM(){}
 
 /*!
 	@brief : Init Hardware SPI
+	@details If custom SCLK/MOSI pins were provided via the TFTsetCustomSPIpins
+	         they are passed to SPI.begin(), allowing use on
+	         boards where the display is hardwired to non-default SPI pins.
+	         When the 4-param (default-pin) overload is used, SPI.begin() is
+	         called without arguments so the platform picks its default pins.
 */
 void GC9A01_LTSM::TFTHWSPIInitialize(void){
-	SPI.begin();
+	if (_display_SCLK != -1 && _display_SDATA != -1) {
+		SPI.begin(_display_SCLK, -1, _display_SDATA, _display_CS);
+	} else {
+		SPI.begin();
+	}
 }
 
 /*!
@@ -81,32 +90,44 @@ void GC9A01_LTSM::TFTsetupGPIO_SPI(uint16_t CommDelay, int8_t rst, int8_t dc, in
 	}
 }
 
-
-
 /*!
-	@brief sets up TFT GPIO
-	@param speed_hz SPI baudrate in hz 
-	@param rst reset GPIO, optional pass -1 to disable, see note
-	@param dc data or command GPIO.
-	@param cs chip select GPIO 
-	@param sclk Data clock GPIO  
-	@param din Data to TFT GPIO 
-	@details if -1 is passed for reset pin, software reset is used, if LCD has optional reset pin
-			Overloaded one of two this one if for hardware  SPI
+	@brief sets up TFT GPIO for hardware SPI using platform default SPI pins
+	@param speed_hz SPI baudrate in hz
+	@param rst reset GPIO, optional pass -1 to disable
+	@param dc data or command GPIO
+	@param cs chip select GPIO
+	@details To use non-default SPI pins call TFTsetCustomSPIpins() immediately after this.
+	         If -1 is passed for rst, software reset is used.
 */
 void GC9A01_LTSM::TFTsetupGPIO_SPI(uint32_t speed_hz, int8_t rst, int8_t dc, int8_t cs)
 {
-	_speedSPIHz = speed_hz;
-	_hardwareSPI = true;
-	_display_RST= rst;
-	_display_DC = dc;
-	_display_CS = cs;
+	_speedSPIHz    = speed_hz;
+	_hardwareSPI   = true;
+	_display_RST   = rst;
+	_display_DC    = dc;
+	_display_CS    = cs;
+	_display_SCLK  = -1;   // -1 = use platform default
+	_display_SDATA = -1;
 
 	if (_display_RST == -1 ){
 		_resetPinOn = false;
 	}else{
 		_resetPinOn = true;
 	}
+}
+
+/*!
+	@brief Override the SPI clock and MOSI pins for hardware SPI
+	@param sclk Clock GPIO
+	@param din  MOSI (data to display) GPIO
+	@details Call this immediately after TFTsetupGPIO_SPI() and before TFTGC9A01Initialize()
+	         only when the display is hardwired to non-default SPI pins.
+			 See example CUSTOM_SPI_PINS.ino for use case.
+*/
+void GC9A01_LTSM::TFTsetCustomSPIpins(int8_t sclk, int8_t din)
+{
+	_display_SCLK  = sclk;
+	_display_SDATA = din;
 }
 
 /*!

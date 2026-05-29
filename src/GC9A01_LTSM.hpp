@@ -42,6 +42,7 @@ public:
 
 	void TFTsetupGPIO_SPI(uint16_t CommDelay, int8_t rst, int8_t dc, int8_t cs, int8_t sclk, int8_t din);
 	void TFTsetupGPIO_SPI(uint32_t baudrate, int8_t rst, int8_t dc, int8_t cs);
+	void TFTsetCustomSPIpins(int8_t sclk, int8_t din);
 	void TFTInitScreenSize(uint16_t w, uint16_t h);
 	void TFTGC9A01Initialize(void);
 	void TFTPowerDown(void);

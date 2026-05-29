@@ -1,9 +1,10 @@
 /*!
-	@file   DEMOS.ino
+	@file   DEMO.ino
 	@author Gavin Lyons
-	@brief   Example file for GC9A01_LTSM arduino library. demo
+	@brief  Example file for GC9A01_LTSM arduino library. demo
 	@note   See USER OPTIONS 1-2 in SETUP function
-			    If dislib16_ADVANCED_GRAPHICS_ENABLE  is not enabled it will not compile
+			If dislib16_ADVANCED_GRAPHICS_ENABLE  is not enabled it will not compile
+			This setting is in display_LTSM  , display16_common_LTSM.hpp ,  User Options section.
 	@test
 		-# Test 408 gauge demo 
 */

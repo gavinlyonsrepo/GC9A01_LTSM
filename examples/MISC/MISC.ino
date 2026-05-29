@@ -3,7 +3,8 @@
 	@brief   Example file for GC9A01_LTSM display Library test file, tests : Text,graphics & functions.
 	@author  Gavin Lyons.
 	@details For graphics tests 905-test909 to work, 
-			     dislib16_ADVANCED_GRAPHICS_ENABLE must be commented in.
+			 dislib16_ADVANCED_GRAPHICS_ENABLE must be commented in.
+			 This setting is in display_LTSM  , display16_common_LTSM.hpp ,  User Options section
 	@note    See USER OPTIONS 1-2 in SETUP function
 	@test 
 	-# Test 500 RGB color OK?

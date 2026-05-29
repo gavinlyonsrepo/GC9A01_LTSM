@@ -9,12 +9,11 @@
 * [Dependency](#dependency)
 * [Documentation](#documentation)
 * [Software](#software)
-	* [Examples](#examples)
-	* [SPI](#spi)
+  * [Examples](#examples)
+  * [SPI](#spi)
 * [Hardware](#hardware)
 * [Tested](#tested)
 * [Output](#output)
-* [Notes and Issues](#notes-and-issues)
 
 ## Overview
 
@@ -43,22 +42,22 @@ GRAM for graphic display data of 240RGBx240 dots, and power supply circuit.
 
 ## Installation
 
-The library is included in the official Arduino library manger and the optimum way to install it is using the library manager which can be opened by the *manage libraries* option in Arduino IDE. 
+The library is included in the official Arduino library manger and the optimum way to install it is using the library manager which can be opened by the *manage libraries* option in Arduino IDE.
 
 ## Dependency
 
 This library requires the Arduino library 'display16_LTSM' as a dependency. display16_LTSM library contains
-the graphics, bitmaps, and font methods as well as font data and bitmap test data. Its also 
+the graphics, bitmaps, and font methods as well as font data and bitmap test data. Its also
 where the user sets options(debug, advanced graphics and frame buffer mode).
-When you install 'GC9A01_LTSM' with Arduino IDE. It should install 'display16_LTSM' as well after 
+When you install 'GC9A01_LTSM' with Arduino IDE. It should install 'display16_LTSM' as well after
 a prompt, if it does not you have to install it same way as 'GC9A01_LTSM'.
 The 'display16_LTSM' project and readme is at [URL github link.](https://github.com/gavinlyonsrepo/display16_LTSM)
-'display16_LTSM' is also written by author of this library. 
+'display16_LTSM' is also written by author of this library.
 
 ## Documentation
 
 Code is commented for the 'doxygen' API generation tool.
-Documents on fonts, bitmaps and graphics can be found at 
+Documents on fonts, bitmaps and graphics can be found at
 the dependency 'display16_LTSM' repository, [URL github link](https://github.com/gavinlyonsrepo/display16_LTSM)
 
 ## Software
@@ -67,12 +66,15 @@ the dependency 'display16_LTSM' repository, [URL github link](https://github.com
 
 There are 5 example files included.
 
-| Filename .ino | Function  | Note |
+| Filename .ino | Function | Note |
 | --- | --- | --- |
 | HELLO WORLD | Hello world basic use case | --- |
-| MISC| Text, Graphics & Functions | dislib16 ADVANCED GRAPHICS ENABLE must be enabled for all tests to work|
-| BITMAP| 1,8 & 16 bit bitmaps tests + bitmap FPS tests| Bitmap test data is stored in arrays |
-| DEMO| A demo showing a gauge | dislib16 ADVANCED GRAPHICS ENABLE must be enabled |
+| CUSTOM_SPI_PINS | HW for display modules(eg some ESP32) with hardwired SPI pins see github issue 2 | --- |
+| MISC | Text, Graphics & Functions | dislib16 ADVANCED GRAPHICS ENABLE must be enabled for all tests to work |
+| BITMAP | 1,8 & 16 bit bitmaps tests + bitmap FPS tests | Bitmap test data is stored in arrays |
+| DEMO | A demo showing a gauge | dislib16 ADVANCED GRAPHICS ENABLE must be enabled |
+| DEMO_TWO | A demo showing a Volume knob | dislib16 ADVANCED GRAPHICS ENABLE must be enabled |
+| DEMO_THREE | A demo showing a clock | dislib16 ADVANCED GRAPHICS ENABLE must be enabled |
 | FRAME BUFFER | Testing frame Buffer mode | dislib16 ADVANCED SCREEN BUFFER ENABLE must be enabled user option 2 |
 
 ### SPI
@@ -83,10 +85,9 @@ where user can make adjustments.
 1. USER OPTION 1 GPIO, SPI_SPEED + TYPE
 2. USER OPTION 2 SCREEN SECTION
 
+#### USER OPTION 1 GPIO SPI SPEED
 
-*USER OPTION 1 GPIO SPI SPEED*
-
-Two different constructors which one is called depends on 'bhardwareSPI', 
+Two different constructors which one is called depends on 'bhardwareSPI',
 true for hardware spi, false for software SPI.
 
 Hardware SPI:
@@ -102,10 +103,9 @@ Setting this higher can be used to slow down Software SPI
 which may be beneficial on Fast MCU's.
 The 5 GPIO pins used. Any GPIO can be used for these.
 
-*USER OPTION 2 Screen size*
+#### USER OPTION 2 Screen size
 
 User can adjust screen pixel height, screen pixel width.
-
 
 ## Hardware
 
@@ -115,39 +115,37 @@ Connections as setup in HELLO_WORLD.ino  test file.
 
 | TFT PinNum | Pindesc | Hardware SPI | Software SPI |
 | --- | --- | --- | --- |
-| 1 | LED | VCC 3.3 | VCC 3.3|
+| 1 | LED | VCC 3.3 | VCC 3.3 |
 | 2 | SCLK | MCU SPI CLK | GPIO12 |
 | 3 | SDA | MCU MOSI | GPIO13 |
 | 4 | A0/DC | GPIO5 | GPIO5 |
 | 5 | RESET | GPIO4 | GPIO4 |
 | 6 | SS/CS | GPIO15 | GPIO15 |
-| 7 | VCC | VCC 3.3 | VCC 3.3|
+| 7 | VCC | VCC 3.3 | VCC 3.3 |
 | 8 | GND | GND | GND |
-
 
 1. This is a 3.3V logic device do NOT connect the I/O logic lines to 5V logic device.
 2. SW SPI pick any GPIO you like , HW SPI SCLK and SDA will be tied to MCU SPI interface.
 3. Backlight on/off control is left to user.
 4. NOTE: Connect LED backlight pin 1 thru a resistor to VCC.
-5. if -1 is passed for reset pin, software reset is used, if LCD module has 
+5. if -1 is passed for reset pin, software reset is used, if LCD module has
 missing or optional reset pin, untested on hardware, may not work.
 
 ## Tested
 
 Tested with both software and hardware SPI on:
 
-- **ESP32**
-- **Arduino UNO R4 Minima**  
- 
+1. ESP32
+2. Arduino UNO R4 Minima
+
 Compiled only (not fully hardware-tested) on:
 
-- **Arduino UNO**
-- **ESP8266**
-- **STM32 “Blue Pill”**
+1. Arduino UNO
+2. ESP8266
+3. STM32 “Blue Pill”
 
-> Some examples on low-RAM MCUs will fail( insufficient memory ), numerous fonts and bitmap data are included.  
+> Some examples on low-RAM MCUs will fail( insufficient memory ), numerous fonts and bitmap data are included.
 > Frame buffer mode example requires sufficient dynamic memory for the buffer — see the README in display16_LTSM for details.
-
 
 ## Output
 

@@ -1,10 +1,13 @@
 /*!
-	@file   HELLO_WORLD.ino
+	@file   CUSTOM_SPI_PINS.ino
 	@author Gavin Lyons
-	@brief  Example file for GC9A01_LTSM arduino library. Test Hello World.
+	@brief  Example file for GC9A01_LTSM arduino library. Test Hello World with custom SPI pins
+          See github issue 2 https://github.com/gavinlyonsrepo/GC9A01_LTSM/issues/2
+
 	@note   See USER OPTIONS 1-2 in SETUP function
+          This example is for ESP32 
 	@test
-		-# Test 101 Print out Hello world  
+		-# Test 102 Print out Hello world with custom SPI pins 
 */
 
 // libraries
@@ -29,16 +32,19 @@ void setup(void) {
   Serial.begin(38400);
   delay(1000);
   // === USER OPTION 1 SPI_SPEED + TYPE ===
-  int8_t DC_TFT = 5;
-  int8_t RST_TFT = 4;
-  int8_t CS_TFT = 15;
+  int8_t DC_TFT    = 2;
+  int8_t RST_TFT   = -1;
+  int8_t CS_TFT    = 7;
+  int8_t SDATA_TFT = 0; // MOSI
+  int8_t SCLK_TFT  = 1;
   if (bhardwareSPI == true) {          // hw spi
     uint32_t TFT_SCLK_FREQ = 8000000;  // Spi freq in Hertz
     myTFT.TFTsetupGPIO_SPI(TFT_SCLK_FREQ, RST_TFT, DC_TFT, CS_TFT);
+    myTFT.TFTsetCustomSPIpins(SCLK_TFT, SDATA_TFT);
   } else {                        // sw spi
     uint16_t SWSPICommDelay = 0;  // optional SW SPI GPIO delay in uS
-    int8_t SDIN_TFT = 26;
-    int8_t SCLK_TFT = 27;
+    int8_t SDIN_TFT = 13;
+    int8_t SCLK_TFT = 12;
     myTFT.TFTsetupGPIO_SPI(SWSPICommDelay, RST_TFT, DC_TFT, CS_TFT, SCLK_TFT, SDIN_TFT);
   }
   // ===
