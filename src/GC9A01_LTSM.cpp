@@ -13,18 +13,21 @@ GC9A01_LTSM :: GC9A01_LTSM(){}
 
 /*!
 	@brief : Init Hardware SPI
-	@details If custom SCLK/MOSI pins were provided via the TFTsetCustomSPIpins
-	         they are passed to SPI.begin(), allowing use on
-	         boards where the display is hardwired to non-default SPI pins.
-	         When the 4-param (default-pin) overload is used, SPI.begin() is
-	         called without arguments so the platform picks its default pins.
+	@details If custom SCLK/MOSI pins were provided via TFTsetCustomSPIpins()
+	         they are passed to SPI.begin() on ESP32, where the 4-arg overload
+	         is supported. On all other platforms the standard no-arg SPI.begin()
+	         is called; custom pin mapping is not available on those targets.
 */
 void GC9A01_LTSM::TFTHWSPIInitialize(void){
+#if defined(ESP32)
 	if (_display_SCLK != -1 && _display_SDATA != -1) {
 		SPI.begin(_display_SCLK, -1, _display_SDATA, _display_CS);
 	} else {
 		SPI.begin();
 	}
+#else
+	SPI.begin();
+#endif
 }
 
 /*!
