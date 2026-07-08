@@ -12,6 +12,8 @@
   * [Examples](#examples)
   * [SPI](#spi)
 * [Hardware](#hardware)
+  * [Connections](#connections)
+  * [Backlight](#backlight)
 * [Tested](#tested)
 * [Output](#output)
 
@@ -64,7 +66,7 @@ the dependency 'display16_LTSM' repository, [URL github link](https://github.com
 
 ### Examples
 
-There are 5 example files included.
+There are example files included:
 
 | Filename .ino | Function | Note |
 | --- | --- | --- |
@@ -109,6 +111,8 @@ User can adjust screen pixel height, screen pixel width.
 
 ## Hardware
 
+### Connections
+
 [![pic ](https://github.com/gavinlyonsrepo/displaylib_16bit_PICO/blob/main/extra/image/gc1.png)](https://github.com/gavinlyonsrepo/displaylib_16bit_PICO/blob/main/extra/image/gc1.png)
 
 Connections as setup in HELLO_WORLD.ino  test file.
@@ -130,6 +134,25 @@ Connections as setup in HELLO_WORLD.ino  test file.
 4. NOTE: Connect LED backlight pin 1 thru a resistor to VCC.
 5. if -1 is passed for reset pin, software reset is used, if LCD module has
 missing or optional reset pin, untested on hardware, may not work.
+
+### Backlight
+
+The function `TFTsetBrightness()` writes the GC9A01 controller's own brightness registers (`0x51`/`0x53`)
+and only has an effect if the module's backlight LED is wired through the controller's own
+brightness output. On most off-the-shelf round GC9A01 modules, including the one tested with
+this library, that is not the case: the backlight (LED/BLK) pin is switched instead by a
+separate transistor circuit on the back of the board, and the backlight is ON by default
+regardless of what is written to the controller. See [Issue #6 Display_Lib_RPI](https://github.com/gavinlyonsrepo/Display_Lib_RPI/issues/6)
+for the full investigation.
+
+To control brightness on this type of module, the backlight pin must be driven directly
+with by GPIO or GPIO-PWM from the host (e.g. a GPIO), independently of this library and the
+GC9A01 driver. See the schematic and board photo below for the switch circuit on the
+tested module.
+
+[![Back of board, component layout](https://github.com/gavinlyonsrepo/Display_Lib_RPI/blob/main/extra/images/gc9a01_back.jpg)](https://github.com/gavinlyonsrepo/Display_Lib_RPI/blob/main/extra/images/gc9a01_back.jpg)
+
+[![Backlight switch circuit schematic](https://github.com/gavinlyonsrepo/Display_Lib_RPI/blob/main/extra/images/gc9a01_sch.png)](https://github.com/gavinlyonsrepo/Display_Lib_RPI/blob/main/extra/images/gc9a01_sch.png)
 
 ## Tested
 
