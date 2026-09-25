@@ -9,7 +9,7 @@
 * [Dependency](#dependency)
 * [Documentation](#documentation)
 * [Software](#software)
-  * [Dependancy user options](#dependancy-user-options)
+  * [Dependency user options](#dependency-user-options)
   * [Examples](#examples)
   * [SPI](#spi)
 * [Hardware](#hardware)
