@@ -3,15 +3,26 @@
 	@author Gavin Lyons
 	@brief  Example file for GC9A01_LTSM arduino librarySee USER OPTIONS 0-2 in SETUP function
 			    dislib16_ADVANCED_SCREEN_BUFFER_ENABLE must be enabled for this example
-			    or it will not compile , requires usable heap memory of (240X240X2) = 115,200 bytes
+			    or it will not compile:
+        	This setting is in library display16_LTSM, display16_common_LTSM.hpp ,  
+			    User Options section.
+          Requires usable heap memory of (240X240X2) = 115,200 bytes
 	@test
 		-# Test 1500 Frame buffer mode.
+    -# Test 601 FPS test Frame buffer mode.
 */
 
 // libraries
 #include "GC9A01_LTSM.hpp"
 // Fonts needed
 #include "fonts_LTSM/FontArialRound_LTSM.hpp"
+// bitmap test data
+#include "bitmap_test_data_LTSM/Bitmap_TEST_Data_16color1.hpp"
+
+//  Test timing related defines
+#define TEST_DELAY1 1000
+#define TEST_DELAY2 2000
+#define TEST_DELAY5 5000
 
 /// @cond
 
@@ -47,6 +58,14 @@ void setup(void) {
   myTFT.TFTGC9A01Initialize();
 
   // set up buffer
+  // Set rotation BEFORE setBuffer(): the buffer is laid out for the display's
+  // current width and height. On a display where width != height, call
+  // setBuffer() again after every rotation change.
+  myTFT.TFTsetRotation(myTFT.Degrees_0); // Degrees_0 is the default, shown for clarity
+  if (myTFT.setBuffer() != DisLib16::Success) {
+    Serial.println("set up buffer error");
+    while (1) {};
+  }
   if (myTFT.setBuffer() != DisLib16::Success){
     Serial.println("buffer not set");
     while(1){};
@@ -60,6 +79,7 @@ void setup(void) {
 // MAIN loop
 void loop(void) {
   Test1500();
+  Test601();
   EndTests();
 }
 // End OF MAIN 
@@ -100,4 +120,70 @@ void Test1500(void) {
   delay(5000);
 }
 
+/*!
+	@brief  Test601 frame rate per second FPS ,results to serial port
+*/
+void Test601(void) {
+   myTFT.clearBuffer(myTFT.C_BLACK);
+   myTFT.setTextColor(myTFT.C_YELLOW, myTFT.C_RED);
+  // Values to count frame rate per second
+  long previousMillis = 0;
+  long lastFramerate = 0;
+  long currentFramerate = 0;
+
+  uint16_t count = 0;
+  uint16_t seconds = 0;
+  uint16_t fps = 0;
+
+  char teststr1[] = "Test 601 FPS, Output Results to USB Serial port";
+  myTFT.writeCharString(75, 75, teststr1);
+  myTFT.writeBuffer();
+  delay(TEST_DELAY5);
+  myTFT.clearBuffer(myTFT.C_BLACK);
+
+  while (1) {
+    unsigned long currentMillis = millis();
+
+    if (currentMillis - previousMillis >= 1000)  // every second
+    {
+      fps = currentFramerate - lastFramerate;
+      lastFramerate = currentFramerate;
+      previousMillis = currentMillis;
+      seconds++;
+      if (seconds == 20)
+        break;
+    }
+    currentFramerate++;
+    count++;
+
+    //  ** Code to test **
+    myTFT.drawBitmap16Data(70, 70, MotorImage, 128, 128);
+    myTFT.setCursor(55, 55);
+    myTFT.print(fps);
+    myTFT.writeBuffer();
+    //   **
+  }  // end of while
+
+  // Report results to usb
+  Serial.print("Seconds :: ");
+  Serial.println(seconds);
+  Serial.print("Count :: ");
+  Serial.println(count);
+  Serial.print("FPS :: ");
+  Serial.println(fps);
+  // Print to screen
+  myTFT.clearBuffer(myTFT.C_BLACK);
+  myTFT.setCursor(40, 55);
+  myTFT.print("Secs : ");
+  myTFT.print(seconds);
+  myTFT.setCursor(40, 75);
+  myTFT.print("Count : ");
+  myTFT.print(count);
+  myTFT.setCursor(40, 95);
+  myTFT.print("FPS : ");
+  myTFT.print(fps);
+  myTFT.writeBuffer();
+  delay(TEST_DELAY5);
+  myTFT.fillScreen(myTFT.C_BLACK);
+}
 /// @endcond
